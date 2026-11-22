@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 import { useRef, useState } from "react";
 import { useIsMobile } from "@/hooks/use-media-query";
+import { withBasePath } from "@/lib/paths";
 
 type Shot = {
   id: string;
@@ -177,7 +178,7 @@ function ShotMedia({ shot }: { shot: Shot }) {
     return (
       <video
         className="absolute inset-0 h-full w-full object-cover"
-        src={shot.src}
+        src={withBasePath(shot.src)}
         autoPlay
         muted
         loop

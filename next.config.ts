@@ -1,12 +1,20 @@
 import type { NextConfig } from "next";
 
+const isGithubPages = process.env.GITHUB_PAGES === "true";
+const basePath = isGithubPages ? "/rksite" : "";
+
 const nextConfig: NextConfig = {
-  /* config options here */
-  experimental: {
-    agentFeedback: true,
+  output: "export",
+  trailingSlash: true,
+  basePath,
+  assetPrefix: basePath || undefined,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
   },
-  cacheComponents: true,
-  partialPrefetching: true,
+  images: {
+    loader: "custom",
+    loaderFile: "./lib/image-loader.ts",
+  },
   turbopack: {
     rules: {
       "*.css": {
